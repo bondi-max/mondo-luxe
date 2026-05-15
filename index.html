@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mondo Luxe | Japan Market Entry Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#1a3a5c;
+  --navy2:#2a5082;
+  --blue-light:#e8f2fb;
+  --gold:#c9a84c;
+  --white:#ffffff;
+  --gray-bg:#f4f7fb;
+  --gray-text:#666e7a;
+  --text:#1a2332;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;color:var(--text);background:#fff;overflow-x:hidden;}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:999;
+  background:rgba(255,255,255,0.97);
+  box-shadow:0 1px 20px rgba(0,0,0,0.08);
+  padding:0 6%;
+  height:68px;display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--navy);text-decoration:none;letter-spacing:0.03em;}
+.logo span{color:var(--gold);}
+.nav-menu{display:flex;align-items:center;gap:2.5rem;list-style:none;}
+.nav-menu a{text-decoration:none;color:var(--gray-text);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;}
+.nav-menu a:hover{color:var(--navy);}
+.btn-nav{background:var(--navy)!important;color:#fff!important;padding:10px 22px;border-radius:3px;}
+.btn-nav:hover{background:var(--navy2)!important;}
+
+/* ===== HERO SLIDER ===== */
+.hero{position:relative;height:100vh;overflow:hidden;}
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;
+  opacity:0;transition:opacity 1s ease;
+  padding:0 6%;
+}
+.slide.active{opacity:1;}
+.slide-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  filter:brightness(0.35);
+}
+.slide:nth-child(1) .slide-bg{background-image:url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1600&q=80');}
+.slide:nth-child(2) .slide-bg{background-image:url('https://images.unsplash.com/photo-1513407030348-c983a97b98d8?w=1600&q=80');}
+.slide:nth-child(3) .slide-bg{background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1600&q=80');}
+.slide-content{position:relative;z-index:1;max-width:700px;}
+.slide-tag{
+  display:inline-block;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  padding:6px 16px;border-radius:2px;margin-bottom:1.8rem;
+}
+.slide-content h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,5vw,4.2rem);
+  font-weight:600;color:#fff;
+  line-height:1.15;margin-bottom:1.4rem;
+}
+.slide-content h1 em{font-style:italic;color:var(--gold);}
+.slide-content p{color:rgba(255,255,255,0.7);font-size:15px;font-weight:300;margin-bottom:2.2rem;max-width:520px;line-height:1.8;}
+.btn-hero{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:#fff;
+  padding:14px 32px;border-radius:3px;
+  text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  transition:background 0.2s,transform 0.2s;
+}
+.btn-hero:hover{background:#a8893a;transform:translateY(-2px);}
+.hero-dots{
+  position:absolute;bottom:2.5rem;left:6%;z-index:2;
+  display:flex;gap:10px;
+}
+.dot{width:28px;height:3px;background:rgba(255,255,255,0.3);border-radius:2px;cursor:pointer;transition:background 0.3s;}
+.dot.active{background:var(--gold);}
+.hero-scroll{
+  position:absolute;bottom:2rem;right:6%;z-index:2;
+  color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.scroll-line{width:1px;height:40px;background:rgba(255,255,255,0.2);animation:scrolldown 1.5s infinite;}
+@keyframes scrolldown{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* ===== STATS BAR ===== */
+.stats-bar{
+  background:var(--navy);
+  padding:2rem 6%;
+  display:flex;justify-content:center;gap:0;
+}
+.stat-item{
+  padding:0 4rem;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,0.1);
+}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:600;color:#fff;line-height:1;}
+.stat-num span{color:var(--gold);}
+.stat-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;}
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-left.visible{opacity:1;transform:none;}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-right.visible{opacity:1;transform:none;}
+
+/* ===== SECTION BASE ===== */
+section{padding:100px 6%;}
+.section-inner{max-width:1150px;margin:0 auto;}
+.tag{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block;}
+.section-h{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:600;color:var(--navy);line-height:1.2;margin-bottom:1rem;}
+.section-lead{color:var(--gray-text);font-size:14px;font-weight:400;max-width:540px;line-height:1.85;margin-bottom:3.5rem;}
+
+/* ===== SERVICES ===== */
+.services{background:var(--gray-bg);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+.service-card{
+  background:#fff;
+  border-radius:6px;
+  padding:2.5rem 2rem;
+  border-bottom:3px solid transparent;
+  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+  box-shadow:0 2px 12px rgba(0,0,0,0.04);
+}
+.service-card:hover{border-bottom-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.1);}
+.service-icon{
+  width:48px;height:48px;
+  background:var(--blue-light);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.5rem;
+}
+.service-icon svg{width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:1.8;}
+.service-h{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:0.8rem;letter-spacing:0.02em;}
+.service-p{font-size:13px;color:var(--gray-text);line-height:1.75;}
+
+/* ===== WHY ===== */
+.why{background:#fff;}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.why-img{
+  position:relative;border-radius:8px;overflow:hidden;
+  height:480px;
+}
+.why-img img{width:100%;height:100%;object-fit:cover;}
+.why-img-badge{
+  position:absolute;bottom:2rem;left:2rem;right:2rem;
+  background:rgba(26,58,92,0.92);
+  backdrop-filter:blur(4px);
+  border-radius:6px;padding:1.2rem 1.5rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.badge-icon{font-size:1.8rem;}
+.badge-text strong{display:block;color:#fff;font-size:13px;font-weight:600;}
+.badge-text span{color:rgba(255,255,255,0.5);font-size:11px;}
+.why-points{display:flex;flex-direction:column;gap:1.8rem;margin-top:2.5rem;}
+.why-point{display:flex;gap:1.2rem;align-items:flex-start;}
+.wp-num{
+  width:36px;height:36px;min-width:36px;
+  border-radius:50%;background:var(--blue-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--navy);
+}
+.wp-text strong{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.wp-text p{font-size:13px;color:var(--gray-text);line-height:1.7;}
+
+/* ===== PROCESS ===== */
+.process{background:var(--navy);}
+.process .section-h{color:#fff;}
+.process .section-lead{color:rgba(255,255,255,0.5);}
+.process .tag{color:var(--gold);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative;}
+.process-grid::before{
+  content:'';position:absolute;top:32px;left:60px;right:60px;height:1px;
+  background:rgba(255,255,255,0.1);z-index:0;
+}
+.process-step{position:relative;z-index:1;}
+.ps-num{
+  width:64px;height:64px;
+  border-radius:50%;
+  border:1.5px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.05);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:600;color:#fff;
+  margin-bottom:1.5rem;
+  transition:background 0.3s,border-color 0.3s;
+}
+.process-step:hover .ps-num{background:var(--gold);border-color:var(--gold);}
+.ps-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:0.6rem;}
+.ps-desc{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.75;}
+
+/* ===== CONTACT ===== */
+.contact{background:var(--gray-bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;}
+.contact-info{margin-top:2rem;}
+.contact-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 0;
+  border-bottom:1px solid var(--gray-bg);
+  color:var(--gray-text);font-size:14px;
+  text-decoration:none;transition:color 0.2s;
+}
+.contact-item:hover{color:var(--navy);}
+.ci-icon{
+  width:38px;height:38px;min-width:38px;
+  border-radius:50%;background:var(--blue-light);
+  display:flex;align-items:center;justify-content:center;
+}
+.ci-icon svg{width:16px;height:16px;stroke:var(--navy);fill:none;stroke-width:2;}
+.contact-form{
+  background:#fff;border-radius:8px;padding:2.5rem;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.fg{margin-bottom:1.2rem;}
+.fg label{display:block;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:6px;}
+.fg input,.fg textarea,.fg select{
+  width:100%;border:1.5px solid #e2e6ec;border-radius:4px;
+  padding:11px 14px;font-family:'Montserrat',sans-serif;font-size:13px;
+  color:var(--text);outline:none;transition:border-color 0.2s;background:#fff;
+}
+.fg input:focus,.fg textarea:focus{border-color:var(--navy);}
+.fg textarea{resize:vertical;min-height:110px;}
+.btn-submit{
+  width:100%;background:var(--navy);color:#fff;border:none;
+  padding:14px;border-radius:4px;font-family:'Montserrat',sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s,transform 0.1s;margin-top:0.5rem;
+}
+.btn-submit:hover{background:var(--navy2);transform:translateY(-1px);}
+
+/* ===== FOOTER ===== */
+footer{
+  background:#0f2035;padding:2.5rem 6%;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-logo{font-family:'Playfair Display',serif;font-size:18px;color:rgba(255,255,255,0.5);}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.25);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:11px;color:rgba(255,255,255,0.3);text-decoration:none;letter-spacing:0.05em;transition:color 0.2s;}
+.footer-links a:hover{color:rgba(255,255,255,0.7);}
+
+@media(max-width:900px){
+  .why-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .process-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+  .process-grid::before{display:none;}
+  .stat-item{padding:0 2rem;}
+  .form-row{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:1rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><img src="logo.png" alt="Mondo Luxe" style="height:40px;vertical-align:middle;"></a>
+  <ul class="nav-menu">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="btn-nav">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO SLIDER -->
+<div class="hero">
+  <div class="slide active">
+    <div class="slide-bg"></div>
+    <div class="slide-content">
+      <div class="slide-tag">🇮🇹 Italy-based · Japan Market Specialist</div>
+      <h1>Your Gateway to the <em>Japanese Market</em></h1>
+      <p>We are your dedicated Japan partner — bringing your product to Japanese consumers through Makuake, exclusive distribution, and full market entry support.</p>
+      <a href="#contact" class="btn-hero">Start a Conversation →</a>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slide-bg"></div>
+    <div class="slide-content">
+      <div class="slide-tag">Crowdfunding Experts</div>
+      <h1>From the World to Japan — <em>Makuake, Retail & Beyond</em></h1>
+      <p>We identify winning products on global crowdfunding platforms and bring them exclusively to Japan's ¥100B+ Makuake market.</p>
+      <a href="#services" class="btn-hero">Our Services →</a>
+    </div>
+  </div>
+  <div class="slide">
+    <div class="slide-bg"></div>
+    <div class="slide-content">
+      <div class="slide-tag">Zero-Risk Partnership</div>
+      <h1>We Succeed <em>When You Succeed</em></h1>
+      <p>No upfront fees. No risk. We invest our expertise and resources into your Japan launch, earning only when your campaign succeeds.</p>
+      <a href="#contact" class="btn-hero">Get a Free Analysis →</a>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num">60<span>+</span></div>
+    <div class="stat-label">Products Launched</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.1s">
+    <div class="stat-num">¥300<span>M+</span></div>
+    <div class="stat-label">Total Raised</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.2s">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Upfront Cost</div>
+  </div>
+  <div class="stat-item reveal" style="transition-delay:0.3s">
+    <div class="stat-num">48<span>h</span></div>
+    <div class="stat-label">Free Analysis</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <span class="tag reveal">What We Do</span>
+    <h2 class="section-h reveal">Full-Cycle Japan Market Entry</h2>
+    <p class="section-lead reveal">From market analysis to Makuake launch, we handle every step of bringing your product to Japanese consumers.</p>
+    <div class="services-grid">
+      <div class="service-card reveal" style="transition-delay:0s">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+        </div>
+        <div class="service-h">Market Analysis & Research</div>
+        <div class="service-p">Deep-dive research into Japanese consumer demand, competitive landscape, and positioning opportunities for your product category.</div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.1s">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        </div>
+        <div class="service-h">Exclusive Distribution Rights</div>
+        <div class="service-p">We become your exclusive Japan distribution partner, securing your market position and managing all local sales channels from day one.</div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.2s">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+        </div>
+        <div class="service-h">Makuake Crowdfunding Launch</div>
+        <div class="service-p">End-to-end campaign management on Japan's leading crowdfunding platform — localization, page creation, PR, and fulfillment.</div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:0.3s">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802"/></svg>
+        </div>
+        <div class="service-h">Localization & Brand Story</div>
+        <div class="service-p">Japanese-market copywriting, cultural adaptation, and brand narrative crafted to resonate with discerning Japanese consumers.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-img reveal-left">
+        <img src="https://images.unsplash.com/photo-1607619662634-3ac55ec0e216?w=800&q=80" alt="Italy">
+        <div class="why-img-badge">
+          <div class="badge-icon">🇮🇹</div>
+          <div class="badge-text">
+            <strong>Italy-Based Global Curator</strong>
+            <span>Italy · Scouting products worldwide</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <span class="tag">Why Mondo Luxe</span>
+        <h2 class="section-h">Italy-Based.<br>Japan-Focused.</h2>
+        <p style="color:var(--gray-text);font-size:14px;line-height:1.85;">Living at the crossroads of European innovation gives us a unique advantage — we discover products before they reach Japan, and position them before anyone else does.</p>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="wp-num">01</div>
+            <div class="wp-text">
+              <strong>First-mover advantage</strong>
+              <p>We scout global crowdfunding platforms daily, identifying products before they enter Japan.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="wp-num">02</div>
+            <div class="wp-text">
+              <strong>Global product sourcing</strong>
+              <p>Deep network across Kickstarter, Indiegogo, ZECZEC, and Wadiz platforms.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="wp-num">03</div>
+            <div class="wp-text">
+              <strong>Zero-risk partnership model</strong>
+              <p>No upfront costs. We succeed only when your product succeeds in Japan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section style="background:var(--gray-bg);padding:100px 6%;" id="projects">
+  <div class="section-inner">
+    <span class="tag reveal">Track Record</span>
+    <h2 class="section-h reveal">Featured Projects</h2>
+    <p class="section-lead reveal">A selection of successful Japan market launches supported by Mondo Luxe.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
+
+      <!-- Card 1 -->
+      <div class="reveal" style="transition-delay:0s;position:relative;border-radius:8px;overflow:hidden;height:420px;box-shadow:0 8px 30px rgba(0,0,0,0.15);">
+        <div style="position:absolute;inset:0;background-image:url('https://bondi-max.github.io/mondo-luxe/cam1.jpg');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(5,15,30,0.95) 30%, rgba(5,15,30,0.0) 60%);"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;">CAMPFIRE · AI Security Camera</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:#fff;margin-bottom:0.8rem;line-height:1.3;">VACOS CAM</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.2rem;">Wireless AI security camera with human-only detection. 612 backers.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:var(--gold);margin-bottom:1rem;">¥23.4M Raised</div>
+          <a href="https://camp-fire.jp/projects/view/313474" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:10px 20px;border-radius:3px;font-size:12px;font-weight:600;text-decoration:none;letter-spacing:0.06em;transition:background 0.2s;width:fit-content;">View Campaign →</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="reveal" style="transition-delay:0.1s;position:relative;border-radius:8px;overflow:hidden;height:420px;box-shadow:0 8px 30px rgba(0,0,0,0.15);">
+        <div style="position:absolute;inset:0;background-image:url('https://bondi-max.github.io/mondo-luxe/cam2.jpg');background-size:cover;background-position:center;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(5,15,30,0.95) 30%, rgba(5,15,30,0.0) 60%);"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;">CAMPFIRE · AI Security Camera</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:#fff;margin-bottom:0.8rem;line-height:1.3;">VACOS CAM IR</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.2rem;">Upgraded AI camera with full-color night vision. 343 backers.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:var(--gold);margin-bottom:1rem;">¥11.1M Raised</div>
+          <a href="https://camp-fire.jp/projects/view/587884" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:10px 20px;border-radius:3px;font-size:12px;font-weight:600;text-decoration:none;letter-spacing:0.06em;transition:background 0.2s;width:fit-content;">View Campaign →</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="reveal" style="transition-delay:0.2s;position:relative;border-radius:8px;overflow:hidden;height:420px;box-shadow:0 8px 30px rgba(0,0,0,0.15);">
+        <div style="position:absolute;inset:0;background-image:url('https://bondi-max.github.io/mondo-luxe/stove.jpg');background-size:contain;background-repeat:no-repeat;background-position:right 0%;background-color:#0d1f35;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(5,15,30,0.95) 30%, rgba(5,15,30,0.0) 60%);"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;">MAKUAKE · Outdoor & Cooking</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:#fff;margin-bottom:0.8rem;line-height:1.3;">QStoves Portable Grill</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:1.2rem;">Innovative portable wood pellet pizza oven & grill. Successfully launched on Makuake.</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:600;color:var(--gold);margin-bottom:1rem;">¥4.6M Raised</div>
+          <a href="https://www.makuake.com/project/qstoves/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:10px 20px;border-radius:3px;font-size:12px;font-weight:600;text-decoration:none;letter-spacing:0.06em;transition:background 0.2s;width:fit-content;">View Campaign →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="section-inner">
+    <span class="tag reveal">How It Works</span>
+    <h2 class="section-h reveal">From Discovery to Launch</h2>
+    <p class="section-lead reveal">A proven 4-step process that takes your product from first contact to Makuake success.</p>
+    <div class="process-grid">
+      <div class="process-step reveal" style="transition-delay:0s">
+        <div class="ps-num">1</div>
+        <div class="ps-title">Market Analysis</div>
+        <div class="ps-desc">Detailed Japan market report confirming demand and identifying ideal positioning for your product.</div>
+      </div>
+      <div class="process-step reveal" style="transition-delay:0.15s">
+        <div class="ps-num">2</div>
+        <div class="ps-title">Distribution Agreement</div>
+        <div class="ps-desc">We sign an exclusive Japan distribution agreement with you, becoming your dedicated local partner.</div>
+      </div>
+      <div class="process-step reveal" style="transition-delay:0.3s">
+        <div class="ps-num">3</div>
+        <div class="ps-title">Makuake Campaign</div>
+        <div class="ps-desc">Full localization, campaign page creation, PR outreach, and launch management.</div>
+      </div>
+      <div class="process-step reveal" style="transition-delay:0.45s">
+        <div class="ps-num">4</div>
+        <div class="ps-title">Fulfillment & Growth</div>
+        <div class="ps-desc">Post-campaign fulfillment and strategy for long-term retail expansion in Japan.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <span class="tag">Get in Touch</span>
+        <h2 class="section-h">Ready to Enter Japan?</h2>
+        <p class="section-lead">Tell us about your product and we'll send you a free Japan market analysis within 48 hours.</p>
+        <div class="contact-info">
+          <a href="mailto:bondi@mondoinfos.com" class="contact-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg></div>
+            bondi@mondoinfos.com
+          </a>
+          <div class="contact-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg></div>
+            Italy
+          </div>
+          <a href="https://www.linkedin.com/in/mondoluxe-curator/" target="_blank" class="contact-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/></svg></div>
+            LinkedIn: Mondo Luxe Curator
+          </a>
+          <a href="https://instagram.com/mondoluxe.jp" target="_blank" class="contact-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-linecap="round" stroke-linejoin="round"/><path stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/></svg></div>
+            @mondoluxe.jp
+          </a>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <div class="form-row">
+          <div class="fg"><label>Your Name</label><input type="text" placeholder="Jane"></div>
+          <div class="fg"><label>Company / Brand</label><input type="text" placeholder="Your Brand"></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" placeholder="jane@yourbrand.com"></div>
+        <div class="fg"><label>Product / Campaign URL</label><input type="url" placeholder="https://kickstarter.com/..."></div>
+        <div class="fg"><label>Message</label><textarea placeholder="Tell us about your product and Japan market goals..."></textarea></div>
+        <button class="btn-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Mondo Luxe</div>
+  <div class="footer-copy">© 2026 Mondo Luxe · Italy-based Japan Market Specialist</div>
+  <div class="footer-links">
+    <a href="mailto:bondi@mondoinfos.com">Email</a>
+    <a href="https://www.linkedin.com/in/mondoluxe-curator/" target="_blank">LinkedIn</a>
+    <a href="https://instagram.com/mondoluxe.jp" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// Slider
+let current=0;
+const slides=document.querySelectorAll('.slide');
+const dots=document.querySelectorAll('.dot');
+function goSlide(n){
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current=n;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+}
+setInterval(()=>goSlide((current+1)%slides.length),5000);
+
+// Scroll reveal
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.15});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
